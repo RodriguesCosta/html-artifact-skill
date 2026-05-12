@@ -1,76 +1,78 @@
 # html-artifact
 
-Uma skill do [Claude Code](https://claude.com/claude-code) que cria artefatos HTML ricos em arquivo único através de uma conversa curta de descoberta — e abre o resultado em um portal do [Maestri](https://www.themaestri.app/) ao lado do seu terminal.
+> 🌎 [Português (pt-br)](README.pt-br.md)
 
-Inspirada no artigo ["The Unreasonable Effectiveness of HTML"](https://x.com/trq212/status/2052809885763747935) do Thariq e no [repositório de exemplos](https://github.com/ThariqS/html-effectiveness).
+A [Claude Code](https://claude.com/claude-code) skill that creates rich, single-file HTML artifacts through a short discovery conversation — and opens them right next to your terminal in a [Maestri](https://www.themaestri.app/) portal.
 
-## O que ela faz
+Inspired by Thariq's ["Unreasonable Effectiveness of HTML"](https://x.com/trq212/status/2052809885763747935) and the [companion repo](https://github.com/ThariqS/html-effectiveness).
 
-Em vez de receber um pedido vago do tipo *"me faz um HTML"* e produzir algo genérico, a skill faz uma conversa curta — no máximo 2–3 perguntas — pra descobrir o que você realmente quer. Só então escreve um arquivo `.html` autocontido e abre num portal do Maestri (ou no navegador padrão se o Maestri não estiver disponível).
+## What it does
 
-**A conversa é o produto. Gerar o HTML é a parte fácil.**
+Instead of taking a vague *"make me an HTML file"* and producing something generic, the skill runs a short conversation — at most 2–3 questions — to figure out what you actually want, then writes a self-contained `.html` file and opens it in a Maestri portal on your canvas (falling back to your default browser if Maestri isn't available).
 
-## Por que HTML em vez de Markdown?
+The conversation is the product. The generation is the easy part.
 
-- **Densidade de informação** — tabelas, layouts em CSS, diagramas SVG inline, interatividade embarcada.
-- **Mais fácil de ler** — uma spec em markdown com 200 linhas é pulada. O mesmo conteúdo em HTML, com sumário lateral, é lido.
-- **Mais fácil de compartilhar** — arquivo único, sem build, faz upload pro S3 ou manda o arquivo direto.
-- **Mão dupla** — sliders, editores drag-drop e botões de "copiar como prompt" mantêm você no loop com o Claude.
+## Why HTML over Markdown?
 
-## Instalação
+- **Information density** — tables, CSS layouts, inline SVG diagrams, embedded interactivity.
+- **Easier to read** — a 200-line markdown spec gets skipped. The same content as HTML with a sidebar TOC gets read.
+- **Easier to share** — single file, no build step, upload to S3 or send the file directly.
+- **Two-way** — sliders, drag-drop editors, "copy as prompt" buttons let you stay in the loop with Claude.
 
-Clone na pasta de skills do seu usuário:
+## Installation
+
+Clone into your user-level skills folder:
 
 ```bash
 git clone git@github.com:RodriguesCosta/html-artifact-skill.git ~/.claude/skills/html-artifact
 ```
 
-Reinicie o Claude Code (ou recarregue as skills) e a skill fica disponível.
+Restart Claude Code (or reload skills) and the skill becomes available.
 
-## Como usar
+## Usage
 
-É só pedir pro Claude Code qualquer coisa que precise de um documento rico de uma vez só. A skill dispara automaticamente em pedidos como:
+Just ask Claude Code anything that needs a rich one-off doc. The skill auto-triggers on:
 
-- "Me faz um arquivo HTML / um artefato HTML"
-- "Cria um editor descartável pra X"
-- "Compara esses 4 layouts lado a lado"
-- "Escreve o plano de implementação em HTML"
-- "Me mostra esse fluxo como diagrama SVG"
-- "Gera um relatório de status da semana"
+- "Make me an HTML file / artifact"
+- "Build me a throwaway editor for X"
+- "Compare these 4 layouts side-by-side"
+- "Write the implementation plan as HTML"
+- "Show me this flow as an SVG diagram"
+- "Generate a status report for the week"
 
-A skill faz algumas perguntas, recapitula o que entendeu em uma frase e escreve o arquivo em `./html-artifacts/<nome-descritivo>.html`. Depois abre num portal do Maestri ao lado do seu terminal.
+The skill will ask you a couple of questions, recap the spec in one sentence, and write the file to `./html-artifacts/<descriptive-name>.html`. It then opens it in a Maestri portal next to your terminal.
 
-### Categorias suportadas
+### Categories supported
 
-A skill conhece o formato dessas categorias comuns de artefato:
+The skill knows the shape of these common artifact types:
 
-- **Planos de implementação** com sumário lateral, mockups, diagramas de fluxo de dados, snippets de código
-- **Diagramas SVG isolados** — flowcharts, sequência, grafos de dependência, mapas mentais
-- **Explorações** — N variantes lado a lado pra escolher uma direção
-- **Code reviews / PR writeups** com diffs anotados e achados categorizados por severidade
-- **Explainers** — TL;DR, seções colapsáveis, snippets em abas, FAQ
-- **Reports de status e incidentes** com timelines e gráficos
-- **Slide decks** com navegação por setas
-- **Editores descartáveis / protótipos** com botão de copiar/exportar bem visível
-- **Referências de design system**
+- **Implementation plans** with sidebar TOC, mockups, data flow diagrams, code snippets
+- **Standalone SVG diagrams** — flowcharts, sequence, dependency graphs, mind maps
+- **Explorations** — N variants side-by-side for picking a direction
+- **Code reviews / PR writeups** with annotated diffs and findings by severity
+- **Explainers** — TL;DR, collapsible sections, tabbed snippets, FAQ
+- **Status & incident reports** with timelines and charts
+- **Slide decks** with arrow-key navigation
+- **Throwaway editors / prototypes** with prominent copy/export buttons
+- **Design system references**
 
 ## Design system
 
-Por padrão a skill usa a paleta Anthropic-style do [repositório html-effectiveness](https://github.com/ThariqS/html-effectiveness) — fundo ivory, acentos clay (laranja quente) e olive, headings em serif e corpo em sans-serif. Se você tem seu próprio design system, aponta o Claude pra ele durante a conversa e a skill segue suas tokens.
+By default the skill uses the calm Anthropic-style palette from Thariq's [html-effectiveness repo](https://github.com/ThariqS/html-effectiveness) — ivory background, clay (warm orange) and olive accents, serif display headings and sans-serif body. If you have your own design system, point Claude at it during the discovery and it'll match.
 
-## Integração com Maestri
+## Maestri integration
 
-Quando rodando em um terminal do [Maestri](https://www.themaestri.app/), a skill abre o HTML gerado em um portal na canvas, ao lado do seu terminal — assim você itera sem sair da conversa.
+When running in a [Maestri](https://www.themaestri.app/) terminal, the skill opens generated HTML files in a portal on the canvas next to your terminal, so you can keep iterating without leaving the conversation.
 
-- Primeira geração cria um portal novo.
-- Em edições seguintes a skill pergunta uma vez por sessão se você prefere reusar o mesmo portal (sobrescreve no lugar) ou abrir um portal novo a cada iteração (sufixos `-v2`, `-v3` pra comparação lado a lado). Sua escolha vale pelo resto da sessão.
+- First generation creates a new portal.
+- On subsequent edits, the skill asks once whether you want to reuse the same portal (overwrite in place) or open new portals per iteration (`-v2`, `-v3` for side-by-side comparison). Your choice sticks for the rest of the session.
 
-Se o `maestri` não estiver no PATH, a skill cai pra `open <arquivo>` no macOS.
+If `maestri` isn't on your PATH, the skill falls back to `open <file>` on macOS.
 
-## Onde os arquivos são salvos
+## Where files are saved
 
-Por padrão em `./html-artifacts/` (uma subpasta do diretório atual do terminal). A pasta é criada se não existir. Se você passar um caminho explícito, a skill respeita.
+By default in `./html-artifacts/` (a subfolder of the terminal's current directory). The folder is created if missing. If you pass an explicit path, the skill honors it.
 
-## Licença
+## License
 
 MIT
