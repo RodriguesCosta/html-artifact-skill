@@ -46,7 +46,8 @@ The skill will ask you a couple of questions, recap the spec in one sentence, an
 
 The skill knows the shape of these common artifact types:
 
-- **Implementation plans** with sidebar TOC, mockups, data flow diagrams, code snippets
+- **Implementation plans** — header + summary strip + numbered sections (milestones, data flow diagram with dual-arrow style, mockups, key code, risks, open questions). Full template in [`references/implementation-plan.md`](references/implementation-plan.md).
+- **SVG illustration sheets** — a set of labeled SVG figures with download buttons + palette/rules footer. Full template in [`references/svg-illustration-sheet.md`](references/svg-illustration-sheet.md).
 - **Standalone SVG diagrams** — flowcharts, sequence, dependency graphs, mind maps
 - **Explorations** — N variants side-by-side for picking a direction
 - **Code reviews / PR writeups** with annotated diffs and findings by severity

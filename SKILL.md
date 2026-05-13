@@ -264,24 +264,20 @@ Diagram type cheat-sheet:
 - **Mind map** — center node with radial branches, color-coded by category.
 - **Annotated timeline** — horizontal axis with dated tick marks, labels above and below.
 
-## Implementation plan template
+## Detailed templates (load on demand)
 
-Structure for the workhorse "implementation plan" artifact:
+For the two most common artifact types, the SKILL.md keeps a short overview and the full templates live in `references/`. **Read the relevant reference file before generating** — it has the exact CSS and SVG snippets to paste in.
 
-```
-┌─ Sidebar TOC ────────┬─ Main column ─────────────────────────┐
-│ • Overview            │ # <Feature name>                       │
-│ • Mockups             │ <one-line elevator pitch>              │
-│ • Data flow           │                                        │
-│ • Code touchpoints    │ ## Overview                            │
-│ • Rollout             │ ## Mockups                             │
-│ • Open questions      │ ## Data flow (inline SVG)              │
-│                       │ ## Code touchpoints (snippets)         │
-│                       │ ## Rollout phases (checklist)          │
-│                       │ ## Open questions (clearly flagged)    │
-└──────────────────────┴────────────────────────────────────────┘
-```
+### Implementation plan
 
-The sidebar TOC should be `position: sticky; top: 0` on the left, ~220px wide. Each TOC entry is an anchor link (`<a href="#data-flow">`). Section headings on the right have matching `id`s.
+The workhorse format. Header + 4-cell summary strip + numbered sections (Milestones → Data flow → Mockups → Key code → Risks → Open questions). The standout component is the **data flow diagram**: an inline SVG with two arrow styles — **solid gray** for synchronous request/response paths and **dashed clay** for realtime / async fan-out — plus a caption that explains the legend in one sentence.
 
-Open questions deserve a visually distinct treatment (e.g. a clay-outlined box with a `?` icon) so reviewers can spot what still needs decisions.
+When asked for an implementation plan (or any non-trivial coding plan), **read `references/implementation-plan.md`** for the full component templates.
+
+### SVG illustration sheet
+
+A single narrow-column page with multiple labeled, downloadable SVG figures plus a palette + rules footer. Use this when the user asks for a *set* of illustrations on a theme (header art for a docs section, icon variants, a state machine plus its retry diagram, etc.). Each figure has a "Download SVG" button that serializes the inline `<svg>` to a standalone file.
+
+Color semantics inside the SVGs: **clay = "in focus"**, **olive = "done / success"**, **oat = "transient holder"**, **gray-150 = "queued / pending"**. Strokes 1.5–2px, all rectangles `rx="10"`, no shadows or gradients.
+
+When asked for multiple SVG illustrations or an illustration set, **read `references/svg-illustration-sheet.md`** for the page scaffold, per-SVG `<style>` block, download script, and figure recipes.

@@ -46,7 +46,8 @@ A skill faz algumas perguntas, recapitula o que entendeu em uma frase e escreve 
 
 A skill conhece o formato dessas categorias comuns de artefato:
 
-- **Planos de implementação** com sumário lateral, mockups, diagramas de fluxo de dados, snippets de código
+- **Planos de implementação** — header + faixa de resumo + seções numeradas (milestones, diagrama de data flow com setas duplas, mockups, key code, riscos, perguntas em aberto). Template completo em [`references/implementation-plan.md`](references/implementation-plan.md).
+- **Folhas de ilustrações SVG** — conjunto de figuras SVG rotuladas com botões de download + rodapé de paleta/regras. Template completo em [`references/svg-illustration-sheet.md`](references/svg-illustration-sheet.md).
 - **Diagramas SVG isolados** — flowcharts, sequência, grafos de dependência, mapas mentais
 - **Explorações** — N variantes lado a lado pra escolher uma direção
 - **Code reviews / PR writeups** com diffs anotados e achados categorizados por severidade
