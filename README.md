@@ -40,7 +40,7 @@ Just ask Claude Code anything that needs a rich one-off doc. The skill auto-trig
 - "Show me this flow as an SVG diagram"
 - "Generate a status report for the week"
 
-The skill will ask you a couple of questions, recap the spec in one sentence, and write the file to `./html-artifacts/<descriptive-name>.html`. It then opens it in a Maestri portal next to your terminal.
+The skill will ask you a couple of questions, recap the spec in one sentence, and write the file to a temporary directory (`$TMPDIR/html-artifacts/<descriptive-name>.html`). It then opens it in a Maestri portal next to your terminal.
 
 ### Categories supported
 
@@ -71,7 +71,7 @@ If `maestri` isn't on your PATH, the skill falls back to `open <file>` on macOS.
 
 ## Where files are saved
 
-By default in `./html-artifacts/` (a subfolder of the terminal's current directory). The folder is created if missing. If you pass an explicit path, the skill honors it.
+By default in `$TMPDIR/html-artifacts/` (resolves to something like `/var/folders/.../T/html-artifacts/` on macOS). Artifacts are throwaway — keep what you exported (markdown / JSON / copied prompt), not the HTML scaffolding. If you want to keep one around, `cp` it somewhere durable or upload to S3. Pass an explicit path to override the default.
 
 ## License
 

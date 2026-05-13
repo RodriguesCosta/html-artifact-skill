@@ -57,7 +57,15 @@ Before writing, restate the spec in one short line so the user can catch misread
 
 ### Generate and open in a Maestri portal
 
-**Save location.** Write the file to `./html-artifacts/<descriptive-name>.html` — a subfolder of the current working directory. Create the folder if it doesn't exist (`mkdir -p ./html-artifacts`). Pick a descriptive filename (`onboarding-explorations.html`, not `output.html`); kebab-case, no spaces. If the user names a different path explicitly, honor that — but the default is always `./html-artifacts/`.
+**Save location.** Write the file to a **temporary directory**, not the project directory — artifacts are throwaway by design (the whole point is that the *conversation* and the *exported state* are what you keep, not the HTML scaffolding). Use this path:
+
+```bash
+"${TMPDIR:-/tmp}/html-artifacts/<descriptive-name>.html"
+```
+
+Create the folder if it doesn't exist (`mkdir -p "${TMPDIR:-/tmp}/html-artifacts"`). Pick a descriptive filename (`onboarding-explorations.html`, not `output.html`); kebab-case, no spaces. If the user names a different path explicitly, honor that — but the default is always the tmp folder.
+
+On macOS `$TMPDIR` resolves to something like `/var/folders/.../T/html-artifacts/`. The OS may clean it occasionally; if the user wants to keep an artifact, tell them to `cp` it somewhere durable or upload it to S3 (see Sharing below).
 
 **Then open it in a Maestri portal**, which renders the file right next to the terminal on the user's canvas. The flow:
 
@@ -80,7 +88,10 @@ The `file://` URL must be **absolute**. Resolve `~` and relative paths before pa
 
 **Fallback.** Always try `maestri portal create` first. If `maestri` isn't on PATH (the terminal isn't running on a Maestri canvas), fall back to `open <file>` on macOS. Quick detection:
 ```bash
-command -v maestri >/dev/null && maestri portal create "file://$PWD/html-artifacts/foo.html" "Foo" || open "html-artifacts/foo.html"
+ARTIFACT="${TMPDIR:-/tmp}/html-artifacts/foo.html"
+command -v maestri >/dev/null \
+  && maestri portal create "file://$ARTIFACT" "Foo" \
+  || open "$ARTIFACT"
 ```
 
 After opening, ask if any tweaks are needed and iterate in-place.

@@ -40,7 +40,7 @@ Reinicie o Claude Code (ou recarregue as skills) e a skill fica disponível.
 - "Me mostra esse fluxo como diagrama SVG"
 - "Gera um relatório de status da semana"
 
-A skill faz algumas perguntas, recapitula o que entendeu em uma frase e escreve o arquivo em `./html-artifacts/<nome-descritivo>.html`. Depois abre num portal do Maestri ao lado do seu terminal.
+A skill faz algumas perguntas, recapitula o que entendeu em uma frase e escreve o arquivo em uma pasta temporária (`$TMPDIR/html-artifacts/<nome-descritivo>.html`). Depois abre num portal do Maestri ao lado do seu terminal.
 
 ### Categorias suportadas
 
@@ -71,7 +71,7 @@ Se o `maestri` não estiver no PATH, a skill cai pra `open <arquivo>` no macOS.
 
 ## Onde os arquivos são salvos
 
-Por padrão em `./html-artifacts/` (uma subpasta do diretório atual do terminal). A pasta é criada se não existir. Se você passar um caminho explícito, a skill respeita.
+Por padrão em `$TMPDIR/html-artifacts/` (no macOS resolve pra algo como `/var/folders/.../T/html-artifacts/`). Artefatos são descartáveis — o que você guarda é o que exportou (markdown / JSON / prompt copiado), não o HTML em si. Se quiser manter um, `cp` pra algum lugar durável ou faz upload pro S3. Passe um caminho explícito pra sobrescrever o padrão.
 
 ## Licença
 
